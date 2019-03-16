@@ -13,5 +13,5 @@ Facebook : http://fb.me/leemrtnzz
 Telegram : http://t.me/leemrtnzz
 WhatsApp : +6283841365567
 if you wish to donate :
-Paypal : -
+Paypal : https://paypal.me/leemrtnzz
 Telp : +6283841365567
