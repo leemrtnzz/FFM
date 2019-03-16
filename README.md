@@ -8,3 +8,10 @@ $use option "[4] Install ADB & FASTBOOT"
 how to use :
 Enter the TWRP file if you want to install TWRP into the TWRP folder
 Entet the ROM file if you want to flashing ROM into the ROM folder
+Confused? please contact me
+Facebook : http://fb.me/leemrtnzz
+Telegram : http://t.me/leemrtnzz
+WhatsApp : +6283841365567
+if you wish to donate :
+Paypal : -
+Telp : +6283841365567
