@@ -7,6 +7,7 @@ $git clone http://github.com/leemrtnzz/Sudo-Termux
 $cd Sudo-Termux
 $python2 sudokeun.py
 $termux-setup-storage
+$cd ..
 $cd storage/shared
 $mkdir flash
 $cd flash
@@ -33,6 +34,7 @@ $git clone http://github.com/leemrtnzz/Sudo-Termux
 $cd Sudo-Termux
 $python2 sudokeun.py
 $termux-setup-storage
+$cd ..
 $cd storage/shared
 $mkdir flash
 $cd flash
