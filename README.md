@@ -4,6 +4,7 @@ note : sudo-termux has been installed
 $apt update && apt upgrade
 $apt install git python2
 $git clone http://github.com/leemrtnzz/Sudo-Termux
+$cd Sudo-Termux
 $python2 sudokeun.py
 $termux-setup-storage
 $cd storage/shared
@@ -29,6 +30,7 @@ Catatan: sudo-termux telah diinstal
 $apt update && apt upgrade
 $apt install git python2
 $git clone http://github.com/leemrtnzz/Sudo-Termux
+$cd Sudo-Termux
 $python2 sudokeun.py
 $termux-setup-storage
 $cd storage/shared
