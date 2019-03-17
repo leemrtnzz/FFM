@@ -13,7 +13,7 @@ $mkdir flash
 $cd flash
 $git clone http://github.com/leemrtnzz/FFM
 $cd FFM
-$sudo flash.py
+$sudo python2 flash.py
 $use option "[4] Install ADB & FASTBOOT"
 how to use :
 Enter the TWRP file if you want to install TWRP into the TWRP folder
@@ -40,7 +40,7 @@ $mkdir flash
 $cd flash
 $git clone http://github.com/leemrtnzz/FFM
 $cd FFM
-$sudo flash.py
+$sudo python2 flash.py
 $ pilih menu nomor "[4] Instal ADB"
 bagaimana cara menggunakan:
 Masukkan file TWRP jika Anda ingin menginstal TWRP ke folder TWRP
