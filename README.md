@@ -2,7 +2,7 @@
 note : sudo-termux has been installed
 $apt update && apt upgrade
 $apt install git python2
-$git clone http://github.com/Sudo-Termux
+$git clone http://github.com/leemrtnzz/Sudo-Termux
 $python2 sudokeun.py
 $git clone http://github.com/leemrtnzz/FFM
 $cd FFM
