@@ -17,7 +17,7 @@ Multipurpose Fastboot Flasher Mobile Open Source!<hr>
 
 ## Getting Started
 
-This project require Python 2 & sudo-termux has been installed
+This project require Python 3 & sudo-termux has been installed
 
 You need to install sudo-termux
 
