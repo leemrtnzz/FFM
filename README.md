@@ -42,7 +42,7 @@ Clone this project must be in the flash folder that has been created or you can 
 ```bash
 > git clone http://github.com/leemrtnzz/FFM
 > cd FFM
-> sudo python2 flash.py
+> sudo python3 flash.py
 > use option "[4] Install ADB & FASTBOOT" //just write down the number
 ```
 
@@ -50,7 +50,7 @@ Clone this project must be in the flash folder that has been created or you can 
 Run the Fastboot Flasher Mobile
 
 ```bash
-> sudo python2 flash.py
+> sudo python3 flash.py
 ```
 Enter the TWRP file if you want to install TWRP into the TWRP folder<br>Enter the ROM file if you want to flashing ROM into the ROM folder
 
