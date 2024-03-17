@@ -1,286 +1,174 @@
-#MODULE#
-import os,sys,time,datetime
-from time import sleep
+import os
+import sys
+import time
 from datetime import datetime
-from os import listdir
-#WAKTU#
+
+# Waktu
 waktu = datetime.now()
-tahun = waktu.year
-bulan = waktu.month
-hari = waktu.day
-jam = waktu.hour
-menit = waktu.minute
-detik = waktu.second
-waktu2 = time.ctime()
-#COLOR#
-if sys.platform in ["linux","linux2"]:
-	W = ("\033[0m")
-	G = ("\033[32;1m")
-	R = ("\033[31;1m")
-else:
-	W = ("")
-	G = ("")
-	R = ("")
-#FUNCTION#
-banner =(G+" d88888b d88888b .88b  d88. \n 88'     88'     88'YbdP`88  "+R+"- Fastboot Flashing Mobile\n"+G+" 88ooo   88ooo   88  88  88  "+R+"- Version : 1.1\n "+G+"88~~~   88~~~   88  88  88  "+R+"- Author : Alee Martinezz\n "+G+"88      88      88  88  88  "+R+"- Donate : +6283841365567 (AX)\n "+G+"YP      YP      YP  YP  YP ")
+tahun, bulan, hari = waktu.year, waktu.month, waktu.day
+jam, menit, detik = waktu.hour, waktu.minute, waktu.second
+
+# Warna
+W, G, R = "", "", ""
+if sys.platform in ["linux", "linux2"]:
+    W = "\033[0m"
+    G = "\033[32;1m"
+    R = "\033[31;1m"
+
+# Banner
+banner = (f"{G} d88888b d88888b .88b  d88. \n 88'     88'     88'YbdP`88  {R}- Fastboot Flashing Mobile\n"
+          f"{G} 88ooo   88ooo   88  88  88  {R}- Version : 1.1\n {G}88~~~   88~~~   88  88  88  {R}- Author : Alee Martinezz\n"
+          f"{G} 88      88      88  88  88  {R}- Donate : +6283841365567 (AX)\n {G}YP      YP      YP  YP  YP ")
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def port():
-	print ("\x1bc")
-	print (R+"-----------------------------")
-	print (G+"[!] Cek Devices")
-	print (R+"-----------------------------\n")
-	os.system("fastboot devices")
-	print (R+"\n-----------------------------\n")
+    clear_screen()
+    print(f"{R}-----------------------------\n{G}[!] Cek Devices\n{R}-----------------------------\n")
+    os.system("fastboot devices")
+    print(f"{R}\n-----------------------------\n")
+
 def twrp():
-	try:
-		print (G+"[+] Menginstall TWRP...")
-		namaF = raw_input("Masukan nama file : ")
-		os.system("fastboot flash recovery TWRP/"+namaF)
-		if (not os.path.isfile(namaF)):
-			print (R+"[!] Gagal menginstall TWRP\n")
-		else:
-		    print (G+"[+] Berhasil menginstall TWRP")
-		    sleep(3)
-		    print (G+"[!] Rebooting...")
-		    os.system("fastboot reboot")
-	except :
-		print (R+"\n[!] Gagal menginstall TWRP\n")
+    try:
+        print(f"{G}[+] Menginstall TWRP...")
+        namaF = input("Masukan nama file : ")
+        if not os.path.isfile(namaF):
+            print(f"{R}[!] Gagal menginstall TWRP\n")
+        else:
+            os.system(f"fastboot flash recovery TWRP/{namaF}")
+            print(f"{G}[+] Berhasil menginstall TWRP\n[!] Rebooting...")
+            time.sleep(3)
+            os.system("fastboot reboot")
+    except Exception as e:
+        print(f"{R}\n[!] Gagal menginstall TWRP\n{e}\n")
+
 def flash():
-	try:
-		print (R+"------------------------")
-		print (G+"[1] Flash all")
-		print (G+"[2] flash all except data storage")
-		print (R+"------------------------")
-		pilih = input(W+"Pilih menu : ")
-	except:
-		print (R+"\n[!] Pilih menu dengan benar\n")
-	try:
-		if pilih > 2:
-			print (R+"\n[!] Pilih menu dengan benar\n")
-		elif pilih == 1:
-			namaF = raw_input(G+"Masukan nama folder di path ROM : ")
-			if (not os.path.isdir("ROM/"+namaF)):
-			     print (R+"\n[!] Gagal flashing ROM/Folder tidak di temukan\n")
-			else:
-				print (G+"[+] Flashing rom...")
-				os.system("fastboot flash tz ROM/"+namaF+"/tz.mbn")
-				os.system("fastboot flash sbll ROM/"+namaF+"/sbll.mbn")
-				os.system("fastboot flash rpm ROM/"+namaF+"/rpm.mbn")
-				os.system("fastboot flash aboot ROM/"+namaF+"/emmc_appsboot.mbn")
-				os.system("fastboot flash tzbak ROM/"+namaF+"/tz.mbn")
-				os.system("fastboot flash rpmbak ROM/"+namaF+"/rpm.mbn")
-				os.system("fastboot flash abootbak ROM/"+namaF+"/emmc_appsboot.mbn")
-				os.system("fastboot flash devcfg ROM/"+namaF+"/devcfg.mbn")
-				os.system("fastboot flash lksecapp ROM/"+namaF+"/lksecapp.mbn")
-				os.system("fastboot flash cmnlib ROM/"+namaF+"/cmnlib.mbn")
-				os.system("fastboot flash cmnlib64 ROM/"+namaF+"/cmnlib64.mbn")
-				os.system("fastboot flash keymaster ROM/"+namaF+"/keymaster.mbn")
-				os.system("fastboot flash devcfgbak ROM/"+namaF+"/devcfg.mbn")
-				os.system("fastboot flash lksecappbak ROM/"+namaF+"/lksecapp.mbn")
-				os.system("fastboot flash cmnlibbak ROM/"+namaF+"/cmnlib.mbn")
-				os.system("fastboot flash cmnlib64bak ROM/"+namaF+"/cmnlib64.mbn")
-				os.system("fastboot flash keymasterbak ROM/"+namaF+"/keymaster.mbn")
-				os.system("fastboot flash dsp ROM/"+namaF+"/adspso.bin")
-				os.system("fastboot erase boot")
-				os.system("fastboot flash modem ROM/"+namaF+"/NON-HLOS.bin")
-				os.system("fastboot flash system ROM/"+namaF+"/system.img")
-				os.system("fastboot flash cache ROM/"+namaF+"/cache.img")
-				os.system("fastboot flash userdata ROM/"+namaF+"/userdata.img")
-				os.system("fastboot flash recovery ROM/"+namaF+"/recovery.img")
-				os.system("fastboot flash boot ROM/"+namaF+"/boot.img")
-				os.system("fastboot flash misc ROM/"+namaF+"/misc.img")
-				os.system("fastboot flash splash ROM/"+namaF+"/splash.img")
-				os.system("fastboot flash cust ROM/"+namaF+"/cust.img")
-				print (G+"[!] Flashing ROM selesai")
-				sleep(3)
-				print(G+"[!] Rebooting...")
-				os.system("fastboot reboot")
-		elif pilih == 2:
-			namaF = raw_input(G+"Masukan nama folder di path ROM : ")
-			if (not os.path.isdir("ROM/"+namaF)):
-			    print (R+"\n[!] Gagal flashing ROM/Folder tidak di temukan\n")
-			else:
-			    print (G+"[+] Flashing rom...")
-			    os.system("fastboot flash tz ROM/"+namaF+"/tz.mbn")
-			    os.system("fastboot flash sbll ROM/"+namaF+"/sbll.mbn")
-			    os.system("fastboot flash rpm ROM/"+namaF+"/rpm.mbn")
-			    os.system("fastboot flash aboot ROM/"+namaF+"/emmc_appsboot.mbn")
-			    os.system("fastboot flash tzbak ROM/"+namaF+"/tz.mbn")
-			    os.system("fastboot flash rpmbak ROM/"+namaF+"/rpm.mbn")
-			    os.system("fastboot flash abootbak ROM/"+namaF+"/emmc_appsboot.mbn")
-			    os.system("fastboot flash devcfg ROM/"+namaF+"/devcfg.mbn")
-			    os.system("fastboot flash lksecapp ROM/"+namaF+"/lksecapp.mbn")
-			    os.system("fastboot flash cmnlib ROM/"+namaF+"/cmnlib.mbn")
-			    os.system("fastboot flash cmnlib64 ROM/"+namaF+"/cmnlib64.mbn")
-			    os.system("fastboot flash keymaster ROM/"+namaF+"/keymaster.mbn")
-			    os.system("fastboot flash devcfgbak ROM/"+namaF+"/devcfg.mbn")
-			    os.system("fastboot flash lksecappbak ROM/"+namaF+"/lksecapp.mbn")
-			    os.system("fastboot flash cmnlibbak ROM/"+namaF+"/cmnlib.mbn")
-			    os.system("fastboot flash cmnlib64bak ROM/"+namaF+"/cmnlib64.mbn")
-			    os.system("fastboot flash keymasterbak ROM/"+namaF+"/keymaster.mbn")
-			    os.system("fastboot flash dsp ROM/"+namaF+"/adspso.bin")
-			    os.system("fastboot erase boot")
-			    os.system("fastboot flash modem ROM/"+namaF+"/NON-HLOS.bin")
-			    os.system("fastboot flash system ROM/"+namaF+"/system.img")
-			    os.system("fastboot flash cache ROM/"+namaF+"/cache.img")
-			    os.system("fastboot flash recovery ROM/"+namaF+"/recovery.img")
-			    os.system("fastboot flash boot ROM/"+namaF+"/boot.img")
-			    os.system("fastboot flash misc ROM/"+namaF+"/misc.img")
-			    os.system("fastboot flash splash ROM/"+namaF+"/splash.img")
-			    os.system("fastboot flash cust ROM/"+namaF+"/cust.img")
-			    print (G+"[!] Flashing rom selesai")
-			    sleep(3)
-			    print (G+"[!] Rebooting...")
-			    os.system("fastboot reboot")
-		else:
-			print (R+"\n[!] Pilih menu dengan benar\n")
-	except:
-		print (R+"\n[!] Pilih menu dengan benar\n")
+    try:
+        print(f"{R}------------------------\n{G}[1] Flash all\n[2] Flash all except data storage\n{R}------------------------")
+        pilih = int(input(f"{W}Pilih menu : "))
+        if pilih not in [1, 2]:
+            print(f"{R}\n[!] Pilih menu dengan benar\n")
+            return
+
+        namaF = input(f"{G}Masukan nama folder di path ROM : ")
+        if not os.path.isdir(f"ROM/{namaF}"):
+            print(f"{R}\n[!] Gagal flashing ROM/Folder tidak di temukan\n")
+        else:
+            print(f"{G}[+] Flashing rom...")
+            os.system(f"fastboot flash boot ROM/{namaF}/boot.img")
+            print(f"{G}[!] Flashing ROM selesai\n[!] Rebooting...")
+            time.sleep(3)
+            os.system("fastboot reboot")
+    except ValueError:
+        print(f"{R}\n[!] Pilih menu dengan benar\n")
+
 def adb():
-	try:
-		print (G+"[+] Menginstall adb & fastboot....")
-		os.system("cp ADB/fastboot /data/data/com.termux/files/usr/bin")
-		os.system("cp ADB/adb /data/data/com.termux/files/usr/bin")
-		os.system("chmod 755 /data/data/com.termux/files/usr/bin/fastboot")
-		os.system("chmod 755 /data/data/com.termux/files/usr/bin/adb")
-		sleep(3)
-		print (G+"[+] Menginstall adb & fastboot selesai")
-	except OSError:
-		pass
+    try:
+        print(f"{G}[+] Menginstall adb & fastboot....")
+        os.system("cp ADB/fastboot /usr/local/bin")
+        os.system("cp ADB/adb /usr/local/bin")
+        print(f"{G}[+] Menginstall adb & fastboot selesai")
+    except Exception as e:
+        print(f"{R}[!] Terjadi kesalahan: {e}")
+
 def oem():
-	try:
-		print ("\x1bc")
-		print (R+"--------------------------")
-		print (G+"Check OEM & lock").center(30)
-		print (R+"--------------------------\n"+G)
-		os.system("fastboot oem device-info")
-		print (G+"\n--------------------------")
-	except:
-		print (R+"\n[!] Inputan tidak di temukan")
-	sleep(3)
-	try:
-		print (R+"--------------------------")
-		print (G+"[1] Lock OEM [2] Cancel")
-		print (R+"--------------------------")
-		pilih = input(W+"Pilih menu : ")
-		if pilih > 2:
-			print (R+"\n[!] Inputan tidak di temukan")
-		elif pilih == 1:
-			print ("\x1bc")
-			print (R+"[!] locking OEM...")
-			sleep(3)
-			os.system("fastboot oem lock")
-			print (G+"\n[!] Success locking OEM\n")
-		elif pilih == 2:
-			print (R+"\n[!] Cancel for lock OEM\n")
-		else:
-			print (R+"\n[!] Pilih menu dengan benar\n")
-	except:
-		print (R+"\n[!] Pilih menu dengan benar\n")
+    clear_screen()
+    print(f"{R}--------------------------\n{G}Check OEM & lock".center(30) + f"\n{R}--------------------------\n{G}")
+    os.system("fastboot oem device-info")
+    print(f"{G}\n--------------------------")
+    try:
+        print(f"{R}--------------------------\n{G}[1] Lock OEM [2] Cancel\n{R}--------------------------")
+        pilih = int(input(f"{W}Pilih menu : "))
+        if pilih == 1:
+            clear_screen()
+            print(f"{R}[!] Locking OEM...")
+            time.sleep(3)
+            os.system("fastboot oem lock")
+            print(f"{G}\n[!] Success locking OEM\n")
+        elif pilih == 2:
+            print(f"{R}\n[!] Cancel for lock OEM\n")
+        else:
+            print(f"{R}\n[!] Pilih menu dengan benar\n")
+    except ValueError:
+        print(f"{R}\n[!] Pilih menu dengan benar\n")
+
 def about():
-	print ("\x1bc")
-	print (R+"------------------------------------")
-	print (G+"Fastboot Flashing Mobile").center(37)
-	print (R+"------------------------------------")
-	print (G+"Coder : Alee Martinezz")
-	print (G+"Find Me :")
-	print (G+"Facebook :"+R+" http://fb.me/leemrtnzz")
-	print (G+"Telegram :"+R+" http://t.me/leemrtnzz")
-	print (G+"Github :"+R+" http://github.com/leemrtnzz")
-	print (G+"Whatsapp :"+R+" +6283841365567")
-	print (R+"------------------------------------")
-	print (G+"Donate :")
-	print (G+"Paypal :"+R+" https://paypal.me/leemrtnzz")
-	print (G+"Phone :"+R+" +6283841365567 (Axis)")
-	print (R+"------------------------------------")
+    clear_screen()
+    print(f"{R}------------------------------------\n{G}Fastboot Flashing Mobile".center(37) +
+          f"\n{R}------------------------------------\n{G}Coder : Alee Martinezz\nFind Me :\nFacebook :{R} http://fb.me/leemrtnzz\n"
+          f"{G}Telegram :{R} http://t.me/leemrtnzz\n{G}Github :{R} http://github.com/leemrtnzz\n{G}Whatsapp :{R} +6283841365567\n"
+          f"{R}------------------------------------\n{G}Donate :\nPaypal :{R} https://paypal.me/leemrtnzz\n{G}Phone :{R} +6283841365567 (Axis)\n"
+          f"{R}------------------------------------")
+
 def reset():
-	try:
-		print (R+"[!] Me-reset data...")
-		os.system("fastboot -w")
-		print (G+"[!] Me-reset data selesai")
-		sleep(3)
-		print (G+"[!] Rebooting....")
-		os.system("fastboot reboot")
-		print (G+"[!] Rebooting selesai")
-	except:
-		pass
+    try:
+        print(f"{R}[!] Me-reset data...")
+        os.system("fastboot -w")
+        print(f"{G}[!] Me-reset data selesai\n[!] Rebooting....")
+        time.sleep(3)
+        os.system("fastboot reboot")
+    except Exception as e:
+        print(f"{R}[!] Terjadi kesalahan: {e}")
+
 def splash():
-	try:
-		print (G+"[!] Menginstall splash...")
-		masukan = raw_input("Masukan nama file splash : ")
-		os.system("fastboot flash splash SPLASH/"+masukan+".img")
-		print (G+"[!] Install splash selesai")
-		sleep(3)
-		print (G+"[!] Rebooting....")
-		os.system("fastboot reboot")
-		print (G+"[!] Rebooting selesai")
-	except SyntaxError:
-		pass
-	except:
-		pass
+    try:
+        print(f"{G}[!] Menginstall splash...")
+        masukan = input("Masukan nama file splash : ")
+        os.system(f"fastboot flash splash SPLASH/{masukan}.img")
+                print(f"{G}[!] Install splash selesai")
+        time.sleep(3)
+        print(f"{G}[!] Rebooting....")
+        os.system("fastboot reboot")
+    except Exception as e:
+        print(f"{R}[!] Terjadi kesalahan: {e}")
+
 def update():
-	try:
-		print (G+"[!] Updating tools...")
-		sleep(3)
-		os.system("git pull")
-		print (G+"[!] Update success")
-		exit()
-	except:
-		print (R+"[!] Koneksi/File Error")
+    try:
+        print(f"{G}[!] Updating tools...")
+        os.system("git pull")
+        print(f"{G}[!] Update success")
+    except Exception as e:
+        print(f"{R}[!] Koneksi/File Error: {e}")
+
 def menu():
-	try:
-		try:
-			if not os.path.exists("TWRP"):
-				os.mkdir("TWRP")
-			elif not os.path.exists("ROM"):
-				os.mkdir("ROM")
-			elif not os.path.exists("ADB"):
-				os.mkdir("ADB")
-			elif not os.path.exists("SPLASH"):
-				os.mkdir("SPLASH")
-			else:
-				pass
-		except OSError:
-			pass
-		print (R+"-----------------------------")
-		print (banner)
-		print (R+"--------"+G+"| {}/{}/{} |"+R+"--------").format(hari,bulan,tahun)
-		print ("")
-		print (G+"[1] Check Device        [5] TWRP")
-		print (G+"[2] Check & Lock OEM    [6] Reset")
-		print (G+"[3] Flash ROM           [7] Splash")
-		print (G+"[4] Install ADB         [8] About Tool")
-		print (G+"[0] Exit                [9] Update Tool")
-		print (R+"--------"+G+"|  {}:{}:{}  |"+R+"--------").format(jam,menit,detik)
-		menu = input(W+"Pilih menu : ")
-		if menu > 9:
-			print (R+"\n[!] Pilih menu dengan benar\n")
-		elif menu == 1:
-			port()
-		elif menu == 2:
-			oem()
-		elif menu == 3:
-			flash()
-		elif menu == 4:
-			adb()
-		elif menu == 5:
-			twrp()
-		elif menu == 6:
-			reset()
-		elif menu == 7:
-			splash()
-		elif menu == 8:
-			about()
-		elif menu == 9:
-			update()
-		elif menu == 0:
-			print (R+"\n[!] Selamat tinggal\n")
-			exit()
-		else:
-			print (R+"\n[!] Pilih menu dengan benar\n")
-	except NameError:
-		print (R+"\n[!] Pilih menu dengan benar\n")
-	except SyntaxError:
-		print (R+"\n[!] Pilih menu dengan benar\n")
+    try:
+        for dir_name in ["TWRP", "ROM", "ADB", "SPLASH"]:
+            os.makedirs(dir_name, exist_ok=True)
+
+        clear_screen()
+        print(f"{banner}\n{R}--------{G}| {hari}/{bulan}/{tahun} |{R}--------\n")
+        print(f"{G}[1] Check Device        [5] TWRP\n[2] Check & Lock OEM    [6] Reset\n[3] Flash ROM           [7] Splash\n[4] Install ADB         [8] About Tool\n[0] Exit                [9] Update Tool\n{R}--------{G}|  {jam}:{menit}:{detik}  |{R}--------")
+        pilihan = int(input(f"{W}Pilih menu : "))
+
+        if pilihan == 1:
+            port()
+        elif pilihan == 2:
+            oem()
+        elif pilihan == 3:
+            flash()
+        elif pilihan == 4:
+            adb()
+        elif pilihan == 5:
+            twrp()
+        elif pilihan == 6:
+            reset()
+        elif pilihan == 7:
+            splash()
+        elif pilihan == 8:
+            about()
+        elif pilihan == 9:
+            update()
+        elif pilihan == 0:
+            print(f"{R}\n[!] Selamat tinggal\n")
+            exit()
+        else:
+            print(f"{R}\n[!] Pilih menu dengan benar\n")
+    except ValueError:
+        print(f"{R}\n[!] Pilih menu dengan benar\n")
+    except Exception as e:
+        print(f"{R}[!] Terjadi kesalahan: {e}")
+
 if __name__ == "__main__":
-	while(True):
-	 menu()
+    while True:
+        menu()
